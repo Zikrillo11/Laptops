@@ -8,7 +8,7 @@ namespace Laptops.Controllers
         {
             return View(); 
         }
-        public IActionResult Error()
+        public IActionResult Error() 
         {
             return View();
         }
