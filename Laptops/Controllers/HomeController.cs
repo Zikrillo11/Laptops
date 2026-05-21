@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Laptops.Controllers 
-{
+{ 
     public class HomeController : Controller
     {
         public IActionResult Index()
