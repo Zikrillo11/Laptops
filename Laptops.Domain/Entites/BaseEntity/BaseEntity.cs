@@ -1,7 +1,7 @@
 ﻿namespace Laptops.Domain.Entites;
 
 public class BaceEntity
-{
+{ 
     public Guid Id { get; set; } 
 
     public DateTime CreatedAt { get; set; }
