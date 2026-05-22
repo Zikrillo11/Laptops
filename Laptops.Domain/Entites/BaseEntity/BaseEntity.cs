@@ -8,5 +8,5 @@ public class BaceEntity
 
     public DateTime? UpdatedAt { get; set; } 
 
-    public bool IsDeleted { get; set; } = false;
+    public bool IsDeleted { get; set; } = false; 
 }
