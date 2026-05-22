@@ -6,7 +6,7 @@ public class BaceEntity
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
      
-    public DateTime? UpdatedAt { get; set; } 
+    public DateTime? UpdatedAt { get; set; }
 
-    public bool IsDeleted { get; set; } 
+    public bool IsDeleted { get; set; } = true;
 }
