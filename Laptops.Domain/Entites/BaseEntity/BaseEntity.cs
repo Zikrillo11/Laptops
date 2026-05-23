@@ -7,6 +7,9 @@ public class BaceEntity
     public DateTime CreatedAt { get; set; }
      
     public DateTime? UpdatedAt { get; set; }
+    public long? UpdatedBy { get; set; }
+    public long? DeletedBy { get; set; }
+
 
     public bool IsDeleted { get; set; } = true;
 }

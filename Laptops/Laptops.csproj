@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -24,7 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\Laptops.BLL.csproj" />
     <ProjectReference Include="..\Laptops.DAL\Laptops.DAL.csproj" />
+    <ProjectReference Include="..\Laptops.Shared\Laptops.Shared.csproj" />
   </ItemGroup>
 
 </Project>
