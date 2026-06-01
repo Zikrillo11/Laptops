@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Laptops.BLL.Interfaces;
+﻿using Laptops.BLL.Interfaces;
 using Laptops.DAL.Interfaces;
 using Laptops.Domain.Entites;
 using Laptops.Shared.DTOs.Laptops;
@@ -9,26 +8,35 @@ namespace Laptops.BLL.Services;
 public class LaptopService : ILaptopService
 {
     private readonly IGenericRepository<Laptop> _repository;
-    private readonly IMapper _mapper;
 
     public LaptopService(
-        IGenericRepository<Laptop> repository,
-        IMapper mapper)
+        IGenericRepository<Laptop> repository)
     {
         _repository = repository;
-        _mapper = mapper;
     }
 
     public async Task<LaptopForResultDto> CreateAsync(
         LaptopForCreateDto dto)
     {
-        var laptop = _mapper.Map<Laptop>(dto);
+        var laptop = new Laptop
+        {
+            Name = dto.Name,
+            Brand = dto.Brand,
+            Price = dto.Price,
+            CreatedAt = DateTime.UtcNow
+        };
 
         await _repository.CreateAsync(laptop);
 
         await _repository.SaveAsync();
 
-        return _mapper.Map<LaptopForResultDto>(laptop);
+        return new LaptopForResultDto
+        {
+            Id = laptop.Id,
+            Name = laptop.Name,
+            Brand = laptop.Brand,
+            Price = laptop.Price
+        };
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -48,19 +56,32 @@ public class LaptopService : ILaptopService
     public async Task<IEnumerable<LaptopForResultDto>> GetAllAsync()
     {
         var laptops = _repository
-            .SelectAll(x => !x.IsDeleted);
+            .SelectAll(x => !x.IsDeleted)
+            .ToList();
 
-        return _mapper.Map<IEnumerable<LaptopForResultDto>>(laptops);
+        return laptops.Select(x => new LaptopForResultDto
+        {
+            Id = x.Id,
+            Name = x.Name,
+            Brand = x.Brand,
+            Price = x.Price
+        });
     }
 
     public async Task<LaptopForResultDto> GetByIdAsync(long id)
     {
         var laptop = await _repository.SelectByIdAsync(id);
 
-        if (laptop is null || laptop.IsDeleted)
+        if (laptop is null)
             return null!;
 
-        return _mapper.Map<LaptopForResultDto>(laptop);
+        return new LaptopForResultDto
+        {
+            Id = laptop.Id,
+            Name = laptop.Name,
+            Brand = laptop.Brand,
+            Price = laptop.Price
+        };
     }
 
     public async Task<LaptopForResultDto> UpdateAsync(
@@ -69,17 +90,24 @@ public class LaptopService : ILaptopService
     {
         var laptop = await _repository.SelectByIdAsync(id);
 
-        if (laptop is null || laptop.IsDeleted)
+        if (laptop is null)
             return null!;
 
-        _mapper.Map(dto, laptop);
-
+        laptop.Name = dto.Name;
+        laptop.Brand = dto.Brand;
+        laptop.Price = dto.Price;
         laptop.UpdatedAt = DateTime.UtcNow;
 
         _repository.Update(laptop);
 
         await _repository.SaveAsync();
 
-        return _mapper.Map<LaptopForResultDto>(laptop);
+        return new LaptopForResultDto
+        {
+            Id = laptop.Id,
+            Name = laptop.Name,
+            Brand = laptop.Brand,
+            Price = laptop.Price
+        };
     }
 }

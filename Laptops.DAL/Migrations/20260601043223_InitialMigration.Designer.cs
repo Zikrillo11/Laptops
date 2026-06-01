@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Laptops.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260523062909_Initial")]
-    partial class Initial
+    [Migration("20260601043223_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,12 +27,17 @@ namespace Laptops.DAL.Migrations
 
             modelBuilder.Entity("Laptops.Domain.Entites.Category", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
@@ -58,85 +63,37 @@ namespace Laptops.DAL.Migrations
 
             modelBuilder.Entity("Laptops.Domain.Entites.Laptop", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("BatteryLife")
-                        .HasColumnType("integer")
-                        .HasColumnName("BatteryLife");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Brand");
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("CategoryId");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Color");
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long?>("DeletedBy")
+                    b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("GPU")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("GPU");
+                    b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsTouchScreen")
-                        .HasColumnType("boolean")
-                        .HasColumnName("IsTouchScreen");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Nmae");
-
-                    b.Property<string>("OperatingSystem")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("OperatingSystem");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric")
-                        .HasColumnName("Price");
-
-                    b.Property<string>("Processor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("Processor");
-
-                    b.Property<int>("Ram")
-                        .HasColumnType("integer")
-                        .HasColumnName("Ram");
-
-                    b.Property<double>("ScreenSize")
-                        .HasColumnType("double precision")
-                        .HasColumnName("ScreenSize");
-
-                    b.Property<int>("Stock")
-                        .HasColumnType("integer")
-                        .HasColumnName("Stock");
-
-                    b.Property<int>("Storage")
-                        .HasColumnType("integer")
-                        .HasColumnName("Storage");
-
-                    b.Property<string>("StorageType")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("StorageType");
+                        .HasColumnType("numeric");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -153,12 +110,17 @@ namespace Laptops.DAL.Migrations
 
             modelBuilder.Entity("Laptops.Domain.Entites.LaptopImage", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
@@ -175,6 +137,9 @@ namespace Laptops.DAL.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("LaptopId");
 
+                    b.Property<long>("LaptopId1")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -183,16 +148,18 @@ namespace Laptops.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LaptopId");
+                    b.HasIndex("LaptopId1");
 
                     b.ToTable("LaptopImmage");
                 });
 
             modelBuilder.Entity("Laptops.Domain.Entites.Review", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -201,6 +168,9 @@ namespace Laptops.DAL.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
@@ -211,6 +181,9 @@ namespace Laptops.DAL.Migrations
                     b.Property<Guid>("LaptopId")
                         .HasColumnType("uuid")
                         .HasColumnName("LaptopId");
+
+                    b.Property<long>("LaptopId1")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Rating")
                         .HasColumnType("integer")
@@ -229,27 +202,23 @@ namespace Laptops.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LaptopId");
+                    b.HasIndex("LaptopId1");
 
                     b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Laptops.Domain.Entites.Laptop", b =>
                 {
-                    b.HasOne("Laptops.Domain.Entites.Category", "Category")
+                    b.HasOne("Laptops.Domain.Entites.Category", null)
                         .WithMany("Laptops")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Laptops.Domain.Entites.LaptopImage", b =>
                 {
                     b.HasOne("Laptops.Domain.Entites.Laptop", "Laptop")
-                        .WithMany("Images")
-                        .HasForeignKey("LaptopId")
+                        .WithMany()
+                        .HasForeignKey("LaptopId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -259,8 +228,8 @@ namespace Laptops.DAL.Migrations
             modelBuilder.Entity("Laptops.Domain.Entites.Review", b =>
                 {
                     b.HasOne("Laptops.Domain.Entites.Laptop", "Laptop")
-                        .WithMany("Reviews")
-                        .HasForeignKey("LaptopId")
+                        .WithMany()
+                        .HasForeignKey("LaptopId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -270,13 +239,6 @@ namespace Laptops.DAL.Migrations
             modelBuilder.Entity("Laptops.Domain.Entites.Category", b =>
                 {
                     b.Navigation("Laptops");
-                });
-
-            modelBuilder.Entity("Laptops.Domain.Entites.Laptop", b =>
-                {
-                    b.Navigation("Images");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
