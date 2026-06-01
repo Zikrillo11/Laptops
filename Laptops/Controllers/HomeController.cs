@@ -1,16 +1,21 @@
+using Laptops.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Laptops.Controllers 
-{ 
-    public class HomeController : Controller
+namespace Laptops.Controllers;
+
+public class HomeController : Controller
+{
+    private readonly ILaptopService _service;
+
+    public HomeController(ILaptopService service)
     {
-        public IActionResult Index()
-        { 
-            return View(); 
-        }
-        public IActionResult Error() 
-        {
-            return View();
-        }
+        _service = service;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var laptops = await _service.GetAllAsync();
+
+        return View(laptops);
     }
 }
