@@ -1,5 +1,5 @@
 ﻿using Laptops.Shared.DTOs.Laptops;
-namespace Laptops.BLL.Interfaces;    
+namespace Laptops.BLL.Interfaces;     
 
 public interface ILaptopService
 {
