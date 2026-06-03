@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Laptops.Shared.DTOs.Laptops.LaptopForResultDto>
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Laptops</h6>
+                    <h2>@Model.Count()</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Brands</h6>
+                    <h2>@Model.Select(x => x.Brand).Distinct().Count()</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">Average Price</h6>
+                    <h2>$@((Model.Any() ? Model.Average(x => x.Price) : 0).ToString("0"))</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h6 class="text-muted">System</h6>
+                    <h2>Online</h2>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+
+            <h4 class="mb-0">
+                💻 Laptop Management
+            </h4>
+
+            <a asp-action="Create"
+               class="btn btn-primary">
+                + Add Laptop
+            </a>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th width="180">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.Id</td>
+
+                            <td>
+                                <strong>@item.Name</strong>
+                            </td>
+
+                            <td>@item.Brand</td>
+
+                            <td>
+                                <span class="badge bg-success">
+                                    $@item.Price
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Delete this laptop?')">
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
