@@ -4,4 +4,5 @@
   <Project Path="Laptops.Domain/Laptops.Domain.csproj" />
   <Project Path="Laptops.Shared/Laptops.Shared.csproj" />
   <Project Path="Laptops/Laptops.csproj" />
+  <Project Path="LaptopsAdmin/LaptopsAdmin.csproj" Id="0bf72a77-b7fa-4f84-9a33-6f5a8653bd25" />
 </Solution>
