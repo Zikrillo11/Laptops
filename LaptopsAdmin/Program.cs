@@ -1,43 +1,60 @@
+using Laptops.BLL.Interfaces;
+using Laptops.BLL.Services;
 using Laptops.DAL.Data;
+using Laptops.DAL.Interfaces;
+using Laptops.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//DataBAse
+// DATABASE
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// REPOSITORY
+builder.Services.AddScoped(
+    typeof(IGenericRepository<>),
+    typeof(GenericRepository<>));
 
-// Add services to the container.
+// SERVICES
+builder.Services.AddScoped<ILaptopService, LaptopService>();
+
+// MVC
 builder.Services.AddControllersWithViews();
+
+// SESSION
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ERROR PAGE
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// ROUTE
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}")
-    .WithStaticAssets();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Admin}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

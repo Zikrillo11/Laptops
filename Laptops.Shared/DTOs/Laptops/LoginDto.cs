@@ -1,4 +1,4 @@
-﻿namespace Laptops.Shared.DTOs.Auth;
+﻿namespace Laptops.Shared.DTOs.Laptops;
 
 public class LoginDto
 {
