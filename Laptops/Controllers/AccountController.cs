@@ -1,4 +1,4 @@
-﻿using Laptops.Shared.DTOs.Auth;
+﻿using Laptops.Shared.DTOs.Laptops;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Laptops.Controllers;
