@@ -10,10 +10,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Login</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <title>Laptops Admin</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
           rel="stylesheet">
@@ -24,6 +21,7 @@
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+                font-family: 'Segoe UI',sans-serif;
             }
 
             body {
@@ -31,134 +29,153 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: radial-gradient(circle at top left, #60a5fa, #2563eb 40%, #0f172a 100%);
-                font-family: 'Segoe UI', sans-serif;
-                padding: 20px;
-            }
-
-            .login-container {
-                width: 1100px;
-                max-width: 100%;
-                min-height: 650px;
-                background: white;
-                border-radius: 30px;
+                background: #050816;
                 overflow: hidden;
-                display: flex;
-                box-shadow: 0 25px 50px rgba(0,0,0,.25);
+                position: relative;
             }
 
-            .left-side {
-                width: 55%;
-                background: linear-gradient( 135deg, #2563eb, #7c3aed);
+            .blob1 {
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                background: #7c3aed;
+                border-radius: 50%;
+                left: -150px;
+                top: -150px;
+                filter: blur(150px);
+                animation: float1 8s infinite alternate;
+            }
+
+            .blob2 {
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                background: #2563eb;
+                border-radius: 50%;
+                right: -150px;
+                bottom: -150px;
+                filter: blur(150px);
+                animation: float2 8s infinite alternate;
+            }
+
+              
+               
+            .login-card {
+                width: 430px;
+                padding: 45px;
+                border-radius: 35px;
+                background: rgba(255,255,255,.08);
+                backdrop-filter: blur(25px);
+                border: 1px solid rgba(255,255,255,.12);
+                box-shadow: 0 0 30px rgba(124,58,237,.4), 0 0 60px rgba(37,99,235,.2);
+                z-index: 10;
+                position: relative;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                margin: auto;
+                margin-bottom: 20px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                flex-direction: column;
+                background: rgba(255,255,255,.08);
+                border: 1px solid rgba(255,255,255,.15);
+            }
+
+                .avatar i {
+                    color: white;
+                    font-size: 65px;
+                }
+
+            h1 {
+                text-align: center;
                 color: white;
-                padding: 40px;
+                margin-bottom: 5px;
+                font-size: 34px;
             }
 
-                .left-side i {
-                    font-size: 140px;
-                    margin-bottom: 20px;
-                }
+            .subtitle {
+                text-align: center;
+                color: #cbd5e1;
+                margin-bottom: 35px;
+            }
 
-                .left-side h1 {
-                    font-size: 48px;
-                    font-weight: 800;
-                }
-
-                .left-side p {
-                    font-size: 18px;
-                    opacity: .9;
-                    margin-top: 10px;
-                }
-
-            .right-side {
-                width: 45%;
+            .input-box {
+                margin-bottom: 25px;
+                border-bottom: 1px solid rgba(255,255,255,.25);
                 display: flex;
-                justify-content: center;
                 align-items: center;
-                padding: 50px;
             }
 
-            .login-box {
-                width: 100%;
-                max-width: 400px;
-            }
-
-                .login-box h2 {
-                    font-size: 35px;
-                    font-weight: 700;
-                    margin-bottom: 10px;
+                .input-box i {
+                    color: white;
+                    margin-right: 12px;
                 }
 
-                .login-box p {
-                    color: gray;
-                    margin-bottom: 30px;
+                .input-box input {
+                    width: 100%;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    color: white;
+                    padding: 15px 0;
+                    font-size: 15px;
                 }
 
-            .form-label {
-                font-weight: 600;
-            }
+                    .input-box input::placeholder {
+                        color: #cbd5e1;
+                    }
 
-            .form-control {
-                height: 55px;
-                border-radius: 12px;
-                border: 1px solid #d1d5db;
-            }
-
-                .form-control:focus {
-                    border-color: #2563eb;
-                    box-shadow: none;
-                }
-
-            .login-options {
+            .options {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
-                margin: 15px 0 25px;
+                margin-bottom: 25px;
+                color: white;
                 font-size: 14px;
             }
 
-                .login-options a {
+                .options a {
+                    color: #93c5fd;
                     text-decoration: none;
-                    color: #2563eb;
                 }
 
-            .btn-login {
+            .login-btn {
                 width: 100%;
                 height: 55px;
                 border: none;
-                border-radius: 12px;
-                background: #2563eb;
+                border-radius: 15px;
+                background: linear-gradient( 90deg, #ec4899, #7c3aed, #2563eb );
                 color: white;
                 font-size: 17px;
-                font-weight: 600;
+                font-weight: 700;
+                letter-spacing: 2px;
+                cursor: pointer;
                 transition: .3s;
             }
 
-                .btn-login:hover {
-                    background: #1d4ed8;
+                .login-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 10px 30px rgba(124,58,237,.5);
                 }
 
-            .error-box {
-                background: #fee2e2;
-                color: #dc2626;
+            .error {
+                background: rgba(239,68,68,.15);
+                border: 1px solid rgba(239,68,68,.3);
+                color: white;
                 padding: 12px;
                 border-radius: 10px;
                 margin-bottom: 20px;
+                text-align: center;
             }
 
-            @@media(max-width:900px) {
-
-                .left-side {
-                    display: none;
-                }
-
-                .right-side {
-                    width: 100%;
-                }
+            .footer {
+                text-align: center;
+                margin-top: 25px;
+                color: #94a3b8;
+                font-size: 12px;
             }
 
     </style>
@@ -167,88 +184,71 @@
 
 <body>
 
-    <div class="login-container">
+    <div class="blob1"></div>
+    <div class="blob2"></div>
 
-        <div class="left-side">
+    <div class="login-card">
 
-            <i class="bi bi-laptop"></i>
-
-            <h1>Laptops Admin</h1>
-
-            <p>
-                Manage products, blogs and website content
-            </p>
-
+        <div class="avatar">
+            <i class="bi bi-person-fill"></i>
         </div>
 
-        <div class="right-side">
+        <h1>Welcome Back</h1>
 
-            <div class="login-box">
+        <div class="subtitle">
+            Sign in to continue to Laptops Admin
+        </div>
 
-                <h2>Welcome Back</h2>
+        @if (ViewBag.Error != null)
+        {
+            <div class="error">
+                @ViewBag.Error
+            </div>
+        }
 
-                <p>
-                    Sign in to your admin account
-                </p>
+        <form method="post">
 
-                @if (ViewBag.Error != null)
-                {
-                    <div class="error-box">
-                        @ViewBag.Error
-                    </div>
-                }
+            <div class="input-box">
 
-                <form method="post">
+                <i class="bi bi-envelope-fill"></i>
 
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Email ID
-                        </label>
-
-                        <input asp-for="Username"
-                               class="form-control"
-                               placeholder="Enter username">
-
-                    </div>
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Password
-                        </label>
-
-                        <input asp-for="Password"
-                               type="password"
-                               class="form-control"
-                               placeholder="Enter password">
-
-                    </div>
-
-                    <div class="login-options">
-
-                        <div>
-                            <input type="checkbox">
-                            Remember me
-                        </div>
-
-                        <a href="#">
-                            Forgot Password?
-                        </a>
-
-                    </div>
-
-                    <button type="submit"
-                            class="btn-login">
-
-                        LOGIN
-
-                    </button>
-
-                </form>
+                <input asp-for="Username"
+                       placeholder="Email ID">
 
             </div>
 
+            <div class="input-box">
+
+                <i class="bi bi-lock-fill"></i>
+
+                <input asp-for="Password"
+                       type="password"
+                       placeholder="Password">
+
+            </div>
+
+            <div class="options">
+
+                <label>
+                    <input type="checkbox">
+                    Remember me
+                </label>
+
+                <a href="#">
+                    Forgot Password?
+                </a>
+
+            </div> 
+
+            <button type="submit"
+                    class="login-btn">
+                LOGIN
+            </button>
+
+        </form>
+
+        <div class="footer">
+            © 2026 Laptops Admin Panel
         </div>
 
     </div>
