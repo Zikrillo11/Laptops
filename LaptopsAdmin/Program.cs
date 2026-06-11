@@ -55,6 +55,6 @@ app.UseAuthorization();
 // ROUTE
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
-
+    pattern: "{controller=Admin}/{action=Index}/{id?}");
+//rpublic class Program
 app.Run();
